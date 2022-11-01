@@ -17,6 +17,7 @@ import  'ng-zorro-antd';
 import { HeaderComponent } from './components/header/header.component';
 import { TickerSearchComponent } from './components/ticker-search/ticker-search.component';
 import { YahooResultDisplayComponent } from './components/yahoo-result-display/yahoo-result-display.component';
+import { AboutPageComponent } from './components/about-page/about-page.component';
 
 registerLocaleData(en);
 
@@ -27,7 +28,8 @@ registerLocaleData(en);
     HomePageComponent,
     HeaderComponent,
     TickerSearchComponent,
-    YahooResultDisplayComponent
+    YahooResultDisplayComponent,
+    AboutPageComponent
   ],
   imports: [
     BrowserModule,

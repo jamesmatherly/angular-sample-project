@@ -1,10 +1,13 @@
 <div class="header-container">
   <div class="header">
     <div class="title" (click)="routeToHomePage()">
-      <h1>Sample Project</h1>
+      <h1>James Matherly</h1>
     </div>
     <ul nz-menu nzMode="horizontal">
-      <li nz-menu-item #faqPage (click)="routeToYahooPage()" id="faq-nav-bar">
+      <li nz-menu-item #aboutPage (click)="routeToAboutPage()" id="about-nav-bar">
+        About
+      </li>
+      <li nz-menu-item #yahooPage (click)="routeToYahooPage()" id="yahoo-nav-bar">
         Yahoo
       </li>
       <li nz-menu-item #faqPage (click)="routeToHomePage()" id="faq-nav-bar">

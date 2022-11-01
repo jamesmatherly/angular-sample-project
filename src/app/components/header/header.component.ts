@@ -23,4 +23,8 @@ export class HeaderComponent implements OnInit {
   routeToYahooPage() {
     this.router.navigate(['yahoo']);
   }
+
+  routeToAboutPage() {
+    this.router.navigate(['about']);
+  }
 }
