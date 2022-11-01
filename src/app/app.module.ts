@@ -1,4 +1,5 @@
 import { DemoNgZorroAntdModule } from './ng-zorro-antd/ng-zorro-antd.module';
+import { AngularMaterialsModule } from './angular-materials/angular-materials.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -18,6 +19,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { TickerSearchComponent } from './components/ticker-search/ticker-search.component';
 import { YahooResultDisplayComponent } from './components/yahoo-result-display/yahoo-result-display.component';
 import { AboutPageComponent } from './components/about-page/about-page.component';
+import { AngMatNavbarComponent } from './components/ang-mat-navbar/ang-mat-navbar.component';
+import { LayoutModule } from '@angular/cdk/layout';
+
 
 registerLocaleData(en);
 
@@ -29,7 +33,8 @@ registerLocaleData(en);
     HeaderComponent,
     TickerSearchComponent,
     YahooResultDisplayComponent,
-    AboutPageComponent
+    AboutPageComponent,
+    AngMatNavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,9 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    DemoNgZorroAntdModule
+    DemoNgZorroAntdModule,
+    AngularMaterialsModule,
+    LayoutModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

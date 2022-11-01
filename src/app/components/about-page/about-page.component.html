@@ -1,3 +1,48 @@
-<div class="content" role="main">
-
+<div class="content" role="main" color="primary">
+  <mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile
+        [colspan]="4"
+        [rowspan]="3">
+      <p>Hi. I'm James. I build enterprise applications in Java using Spring Boot.
+        I also dabble in angular and I'm learning AWS right now. I'll be a
+        certified Solutions Architect in no time!
+      </p>
+    </mat-grid-tile>
+    <mat-grid-tile
+        [colspan]="4"
+        [rowspan]="1">
+      <p>Current Projects
+      </p>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab color="primary" label="Angular Web Page">
+      <p>
+        You're looking at it!
+      </p>
+      <p>
+        I felt that my front end skill could use some more polishing, so I decided to try my hand at an Angular page.
+        The purpose of this project is to create a simple, attractive web site with some CI/CD features and integrate
+        it with my Java services in the cloud.
+      </p>
+    </mat-tab>
+    <mat-tab label="Java Microservices">
+      <p>
+        The purpose of this project is to setup some simple microservices in AWS with some CI/CD features. I'm pretty
+        comfortable with Java development, so this project is simply meant to interact with some AWS services in order
+        to integrate things I already know with things I'm trying to learn.
+      </p>
+    </mat-tab>
+    <mat-tab label="AWS">
+      <p>
+        The purpose of this project is to learn about the features that AWS offers and how that can help me be a more
+        productive developer. To improve my skills within the context of enterprise development, my goal is to have
+        automated CI/CD pipelines that leverage AWS to deploy my Java applications to the cloud.
+      </p>
+      <p>
+        Additionally, I am working towards my Solutions Architect certification and trying to work with as many AWS tools
+        as I can to get a feel for the ecosystem.
+      </p>
+    </mat-tab>
+  </mat-tab-group>
 </div>

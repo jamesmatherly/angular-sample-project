@@ -1,20 +1,16 @@
-<div class="header-container">
-  <div class="header">
-    <div class="title" (click)="routeToHomePage()">
-      <h1>James Matherly</h1>
-    </div>
-    <ul nz-menu nzMode="horizontal">
-      <li nz-menu-item #aboutPage (click)="routeToAboutPage()" id="about-nav-bar">
-        About
-      </li>
-      <li nz-menu-item #yahooPage (click)="routeToYahooPage()" id="yahoo-nav-bar">
-        Yahoo
-      </li>
-      <li nz-menu-item #faqPage (click)="routeToHomePage()" id="faq-nav-bar">
-        Home
-      </li>
-    </ul>
-  </div>
-</div>
+<mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>James Matherly</span>
+    <span class="example-spacer"></span>
+    <button mat-button (click)="routeToYahooPage()">Yahoo</button>
+    <button mat-button (click)="routeToAboutPage()">About</button>
 
-
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar>
