@@ -1,0 +1,29 @@
+@import '../../../styles.css';
+
+.header-container {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 3000;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #333333;
+    padding: 0 10px;
+    .title {
+      display: flex;
+      justify-content: flex-start;
+      cursor: pointer;
+      h1 {
+        font-weight: 100;
+        padding: 15px 0 0 10px;
+        color: white;
+      }
+    }
+  }
+}
+
+
+
+
+

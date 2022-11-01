@@ -1,5 +1,5 @@
-import { HomePageComponent } from './home-page/home-page.component';
-import { YahooProjectPageComponent } from './yahoo-project-page/yahoo-project-page.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { YahooProjectPageComponent } from './components/yahoo-project-page/yahoo-project-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 

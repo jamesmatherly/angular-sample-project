@@ -1,0 +1,7 @@
+{
+  "/controller": {
+    "target": "http://jameslearnscloud.com",
+    "secure": true,
+    "changeOrigin": true
+  }
+}

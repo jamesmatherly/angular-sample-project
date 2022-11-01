@@ -1,0 +1,10 @@
+<div class="content" role="main">
+  <app-ticker-search
+    (updatedTicker)="getDetails($event)"
+    ticker="stockDetails"></app-ticker-search>
+  <div *ngIf="stockDetails">
+    <app-yahoo-result-display
+      [ticker]="ticker"
+      [stockDetails]="stockDetails"></app-yahoo-result-display>
+  </div>
+</div>
