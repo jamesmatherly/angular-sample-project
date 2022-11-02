@@ -3,7 +3,7 @@
     <mat-grid-tile
         [colspan]="4"
         [rowspan]="3">
-      <p>Hi. I'm James. I build enterprise applications in Java using Spring Boot.
+      <p id="blurb">Hi. I'm James. I build enterprise applications in Java using Spring Boot.
         I also dabble in angular and I'm learning AWS right now. I'll be a
         certified Solutions Architect in no time!
       </p>
@@ -11,38 +11,102 @@
     <mat-grid-tile
         [colspan]="4"
         [rowspan]="1">
-      <p>Current Projects
+      <p class="heading">Current Projects
       </p>
     </mat-grid-tile>
   </mat-grid-list>
   <mat-tab-group mat-align-tabs="center">
     <mat-tab color="primary" label="Angular Web Page">
-      <p>
-        You're looking at it!
-      </p>
-      <p>
-        I felt that my front end skill could use some more polishing, so I decided to try my hand at an Angular page.
-        The purpose of this project is to create a simple, attractive web site with some CI/CD features and integrate
-        it with my Java services in the cloud.
-      </p>
+      <div class="tab-content">
+        <p>
+          You're looking at it!
+          <br>
+          <br>
+          I felt that my front end skill could use some more polishing, so I decided to try my hand at an Angular page.
+          The purpose of this project is to create a simple, attractive web site with some CI/CD features and integrate
+          it with my Java services in the cloud.
+        </p>
+      </div>
     </mat-tab>
     <mat-tab label="Java Microservices">
-      <p>
-        The purpose of this project is to setup some simple microservices in AWS with some CI/CD features. I'm pretty
-        comfortable with Java development, so this project is simply meant to interact with some AWS services in order
-        to integrate things I already know with things I'm trying to learn.
-      </p>
+      <div class="tab-content">
+        <p>
+          The purpose of this project is to setup some simple microservices in AWS with some CI/CD features. I'm pretty
+          comfortable with Java development, so this project is simply meant to interact with some AWS services in order
+          to integrate things I already know with things I'm trying to learn.
+        </p>
+      </div>
     </mat-tab>
     <mat-tab label="AWS">
-      <p>
-        The purpose of this project is to learn about the features that AWS offers and how that can help me be a more
-        productive developer. To improve my skills within the context of enterprise development, my goal is to have
-        automated CI/CD pipelines that leverage AWS to deploy my Java applications to the cloud.
-      </p>
-      <p>
-        Additionally, I am working towards my Solutions Architect certification and trying to work with as many AWS tools
-        as I can to get a feel for the ecosystem.
-      </p>
+      <div class="tab-content">
+        <p>
+          The purpose of this project is to learn about the features that AWS offers and how that can help me be a more
+          productive developer. To improve my skills within the context of enterprise development, my goal is to have
+          automated CI/CD pipelines that leverage AWS to deploy my Java applications to the cloud.
+          <br>
+          <br>
+          Additionally, I am working towards my Solutions Architect certification and trying to work with as many AWS tools
+          as I can to get a feel for the ecosystem.
+        </p>
+      </div>
     </mat-tab>
   </mat-tab-group>
+  <mat-grid-list cols="6" rowHeight="100px">
+    <mat-grid-tile
+        [colspan]="6"
+        [rowspan]="1">
+      <p class="heading">
+        A Little More About Me
+      </p>
+    </mat-grid-tile>
+    <mat-grid-tile
+        [colspan]="2"
+        [rowspan]="5">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>Lifting</mat-card-title>
+            <mat-card-subtitle>I was beig a tad ambitions</mat-card-subtitle>
+          </mat-card-header>
+          <img id="deadlift-img" mat-card-image src="/assets/Deadlift.png">
+          <mat-card-content>
+            <p>
+              I enjoy lifting weights. Nothiing like a personal best deadlift to make me feel strong!
+            </p>
+          </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile
+        [colspan]="2"
+        [rowspan]="5">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>The Loves of my Life</mat-card-title>
+            <mat-card-subtitle>Chillin' at home</mat-card-subtitle>
+          </mat-card-header>
+
+          <img mat-card-image src="/assets/Girls.jpg">
+          <mat-card-content>
+            <p>
+              This is my fianceé and our 2 pets. I love them more than anything else in the world!
+            </p>
+          </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile
+        [colspan]="2"
+        [rowspan]="5">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>Woodworking</mat-card-title>
+            <mat-card-subtitle>My shop</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image src="/assets/Shop.jpg">
+          <mat-card-content>
+            <p>
+              I like to woodwork as a hobby. I'm not very good, but I still enjoy it.
+            </p>
+          </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
