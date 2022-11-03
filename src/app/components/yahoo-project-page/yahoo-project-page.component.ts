@@ -10,15 +10,21 @@ import { Component, OnInit } from '@angular/core';
 export class YahooProjectPageComponent implements OnInit {
 
   ticker: string;
-  stockDetails: StockDetails;
+  onPage: StockDetails[] = [];
 
   constructor(private yahooService: YahooService) { }
 
   ngOnInit(): void {
   }
 
-  getDetails(ticker: string) {
-    this.ticker = ticker;
-    this.yahooService.getTickerSummary(ticker).subscribe( (data) => this.stockDetails = data);
+  getDetails() {
+    var detail: StockDetails;
+    this.yahooService.getTickerSummary(this.ticker).subscribe( (data) => {
+      detail = data;
+      detail.ticker = this.ticker
+      this.onPage = [detail, ...this.onPage];
+      this.ticker = "";
+    });
+
   }
 }

@@ -1,6 +1,9 @@
 .container {
   margin-bottom: 10px;
 }
+.content{
+  margin: 1rem 2%;
+}
 
 html, body { height: fit-content; }
 body { margin: 0 0 1rem 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

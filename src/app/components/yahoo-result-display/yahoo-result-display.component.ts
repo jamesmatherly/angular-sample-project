@@ -10,8 +10,6 @@ export class YahooResultDisplayComponent implements OnInit {
 
   @Input()
   stockDetails: StockDetails;
-  @Input()
-  ticker: string;
 
   constructor() { }
 

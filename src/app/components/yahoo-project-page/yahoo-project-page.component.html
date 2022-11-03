@@ -1,10 +1,14 @@
 <div class="content" role="main">
-  <app-ticker-search
-    (updatedTicker)="getDetails($event)"
-    ticker="stockDetails"></app-ticker-search>
-  <div *ngIf="stockDetails">
+  <form (ngSubmit)="getDetails()">
+    <mat-form-field appearance="outline" id="ticker-search-bar">
+      <mat-label>Ticker Search</mat-label>
+      <input [(ngModel)]="ticker" name="ticker" matInput placeholder="Enter a stock ticker">
+      <mat-icon matSuffix (click)="getDetails()">sentiment_very_satisfied</mat-icon>
+    </mat-form-field>
+  </form>
+  <div id="result-container">
     <app-yahoo-result-display
-      [ticker]="ticker"
-      [stockDetails]="stockDetails"></app-yahoo-result-display>
+      [stockDetails]="detail"
+      *ngFor="let detail of onPage"></app-yahoo-result-display>
   </div>
 </div>

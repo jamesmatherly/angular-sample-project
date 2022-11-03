@@ -1,9 +1,7 @@
-<div *ngIf="ticker">
-<nz-card style="width:300px;" nzTitle="{{ ticker | uppercase }}" [nzExtra]="extraTemplate">
+<nz-card style="width:300px;" nzTitle="{{ stockDetails.ticker | uppercase }}" [nzExtra]="extraTemplate">
   <p>Raw Target High Price: {{ stockDetails.targetHighPrice.raw }}</p>
   <p>FMT Target High Price: {{ stockDetails.targetHighPrice.fmt }}</p>
 </nz-card>
 <ng-template #extraTemplate>
   <a>More</a>
 </ng-template>
-</div>
