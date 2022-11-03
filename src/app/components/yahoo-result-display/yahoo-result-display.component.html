@@ -1,7 +1,9 @@
-<nz-card style="width:300px;" nzTitle="{{ stockDetails.ticker | uppercase }}" [nzExtra]="extraTemplate">
-  <p>Raw Target High Price: {{ stockDetails.targetHighPrice.raw }}</p>
-  <p>FMT Target High Price: {{ stockDetails.targetHighPrice.fmt }}</p>
-</nz-card>
-<ng-template #extraTemplate>
-  <a>More</a>
-</ng-template>
+<mat-card style="width:300px;">
+  <mat-card-header>
+    <mat-card-title>{{ stockDetails.ticker | uppercase }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Raw Target High Price: {{ stockDetails.targetHighPrice.raw }}</p>
+    <p>FMT Target High Price: {{ stockDetails.targetHighPrice.fmt }}</p>
+  </mat-card-content>
+</mat-card>
