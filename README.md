@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This project is meant as a learning exercise in Angular development, CI/CD implementation, and AWS integration.
 
-The current iteration of the website as it appears in this repo can be found (here)[http://jameslearnscloud.com]
+The current iteration of the website as it appears in this repo can be found [here](http://jameslearnscloud.com)
 
 ## Development server
 
