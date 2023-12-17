@@ -27,4 +27,8 @@ export class HeaderComponent implements OnInit {
   routeToAboutPage() {
     this.router.navigate(['about']);
   }
+
+  routeToWoodworkingPage() {
+    this.router.navigate(['woodworking']);
+  }
 }

@@ -15,6 +15,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { YahooResultDisplayComponent } from './components/yahoo-result-display/yahoo-result-display.component';
 import { AboutPageComponent } from './components/about-page/about-page.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { WoodworkingPageComponent } from './components/woodworking-page/woodworking-page.component';
 
 
 registerLocaleData(en);
@@ -26,7 +27,8 @@ registerLocaleData(en);
     HomePageComponent,
     HeaderComponent,
     YahooResultDisplayComponent,
-    AboutPageComponent
+    AboutPageComponent,
+    WoodworkingPageComponent
   ],
   imports: [
     BrowserModule,
