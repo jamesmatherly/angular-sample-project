@@ -3,7 +3,7 @@
     <mat-card-title>{{ stockDetails.ticker | uppercase }}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <p>Raw Target High Price: {{ stockDetails.targetHighPrice.raw }}</p>
-    <p>FMT Target High Price: {{ stockDetails.targetHighPrice.fmt }}</p>
+    <p>Current Price: {{ stockDetails.currentPrice }}</p>
+    <p>Change: {{ stockDetails.change }}</p>
   </mat-card-content>
 </mat-card>

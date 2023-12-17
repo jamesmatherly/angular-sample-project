@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class YahooService{
 
-  url: string = 'http://api.jameslearnscloud.com/controller?ticker=';
+  url: string = 'http://localhost:8080/finnhubQuote?ticker=';
 
   constructor(private http: HttpClient) { }
 
