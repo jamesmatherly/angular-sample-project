@@ -1,19 +1,37 @@
 import { StockDetails } from './../models/stock-details';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IUser, CognitoService } from '../services/cognito.service';
+import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class YahooService{
 
-  url: string = 'http://localhost:8080/finnhubQuote?ticker=';
+  url: string = `${environment.backendUrl}/finnhubQuote?ticker=`;
+  loading: boolean;
+  user: IUser;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private cognitoService: CognitoService,
+    private cookieService: CookieService
+  ) { 
+    this.loading = false;
+    this.user = {} as IUser;
+  }
 
   getTickerSummary(ticker: string): Observable<any> {
-    return this.http.get<StockDetails>(this.url + ticker);
+    let token: string = this.cookieService.get('accessToken');
+    if (!token) {
+      this.cognitoService.redirectToCognitoLogin(`${environment.frontendUrl}/yahoo`);
+    }
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<StockDetails>(this.url + ticker, {headers});
   }
 
 }
