@@ -9,7 +9,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { YahooResultDisplayComponent } from './components/yahoo-result-display/yahoo-result-display.component';
@@ -20,27 +20,21 @@ import { WoodworkingPageComponent } from './components/woodworking-page/woodwork
 
 registerLocaleData(en);
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    YahooProjectPageComponent,
-    HomePageComponent,
-    HeaderComponent,
-    YahooResultDisplayComponent,
-    AboutPageComponent,
-    WoodworkingPageComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    AngularMaterialsModule,
-    LayoutModule
-  ],
-  providers: [
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        YahooProjectPageComponent,
+        HomePageComponent,
+        HeaderComponent,
+        YahooResultDisplayComponent,
+        AboutPageComponent,
+        WoodworkingPageComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        AngularMaterialsModule,
+        LayoutModule], providers: [
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
