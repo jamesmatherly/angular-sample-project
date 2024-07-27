@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IUser, CognitoService } from '../services/cognito.service';
-import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -16,15 +15,14 @@ export class YahooService{
   user: IUser;
 
   constructor(private http: HttpClient,
-    private cognitoService: CognitoService,
-    private cookieService: CookieService
+    private cognitoService: CognitoService
   ) { 
     this.loading = false;
     this.user = {} as IUser;
   }
 
   getTickerSummary(ticker: string): Observable<any> {
-    let token: string = this.cookieService.get('accessToken');
+    let token: string = this.cognitoService.getToken();
     if (!token) {
       this.cognitoService.redirectToCognitoLogin(`${environment.frontendUrl}/yahoo`);
     }

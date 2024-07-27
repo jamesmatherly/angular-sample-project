@@ -3,7 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import {jwtDecode} from 'jwt-decode';
 
 
 export interface IUser {
@@ -12,6 +12,12 @@ export interface IUser {
   showPassword: boolean;
   code: string;
   name: string;
+}
+
+export interface CognitoToken {
+  id_token: string;
+  access_token: string;
+  refresh_token: string;
 }
 
 @Injectable({
@@ -36,7 +42,7 @@ export class CognitoService {
   }
 
   // Exchange authorization code for tokens
-  public handleAuthCode(code: string): Observable<any> {
+  public handleAuthCode(code: string): void {
     const tokenUrl = `https://${this.cognitoDomain}/oauth2/token`;
 
     const body = new HttpParams()
@@ -51,16 +57,52 @@ export class CognitoService {
     });
 
     try {
-      return this.http.post(tokenUrl, body.toString(), { headers });
+      const secure = false; // Set to true if you're serving over HTTPS
+      const sameSite = 'None'; // You can use 'Lax' or 'None' based on your requirement
+      this.http.post(tokenUrl, body.toString(), { headers }).subscribe(
+        token => this.cookieService.set('tokens', JSON.stringify(token), 1, '/', '', secure, sameSite)
+      );
     } catch (error) {
       console.error('Token exchange error:', error);
       throw error;
     }
   }
 
+  public getToken(): string {
+    let tokens = this.cookieService.get('tokens');
+    if(tokens) {
+      console.log(tokens);
+      let token: CognitoToken = JSON.parse(tokens);
+      const decodedToken: any = jwtDecode(token.access_token);
+      const exp = decodedToken.exp;
+      const currentTime = Math.floor(Date.now() / 1000);
+      if (exp < currentTime) {
+        this.refreshToken(token.refresh_token);
+      }
+      return token.access_token;
+    } else {
+      return '';
+    }
+  }
+
+  public refreshToken(refreshToken: string): void {
+    const body = new URLSearchParams();
+    body.set('grant_type', 'refresh_token');
+    body.set('client_id', this.clientId);
+    body.set('refresh_token', refreshToken);
+
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    
+    const secure = false; // Set to true if you're serving over HTTPS
+    const sameSite = 'None'; // You can use 'Lax' or 'None' based on your requirement
+    this.http.post(`https://${this.cognitoDomain}/oauth2/token` , body.toString(), { headers }).subscribe(
+      token => this.cookieService.set('tokens', JSON.stringify(token), 1, '/', '', secure, sameSite)
+    );
+  }
+
   // Example method to make authenticated API calls
   public async callApiWithToken(apiUrl: string): Promise<any> {
-    const token = this.cookieService.get('accessToken');
+    const token = this.cookieService.get('tokens');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
