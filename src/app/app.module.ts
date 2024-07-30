@@ -16,7 +16,9 @@ import { YahooResultDisplayComponent } from './components/yahoo-result-display/y
 import { AboutPageComponent } from './components/about-page/about-page.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { WoodworkingPageComponent } from './components/woodworking-page/woodworking-page.component';
-
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
+import { BaseChartDirective } from 'ng2-charts';
 
 registerLocaleData(en);
 
@@ -27,14 +29,17 @@ registerLocaleData(en);
         HeaderComponent,
         YahooResultDisplayComponent,
         AboutPageComponent,
-        WoodworkingPageComponent
+        WoodworkingPageComponent,
+        DashboardComponent,
+        LineChartComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         FormsModule,
         BrowserAnimationsModule,
         AngularMaterialsModule,
-        LayoutModule], providers: [
+        LayoutModule,
+        BaseChartDirective], providers: [
         provideHttpClient(withInterceptorsFromDi())
     ] })
 export class AppModule { }

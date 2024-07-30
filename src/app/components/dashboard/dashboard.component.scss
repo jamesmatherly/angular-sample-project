@@ -1,0 +1,16 @@
+mat-list-item {
+  display: flex;
+  align-items: center;
+}
+
+.content-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#portfolio-details-card,
+#user-details-card {
+  margin: 5px;
+}
+  
