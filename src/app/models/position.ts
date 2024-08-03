@@ -1,7 +1,6 @@
 export class Position {
     ticker: string;
-    costBases: string;
+    costBasis: string;
     currentValue: string;
     quantity: string;
   }
-  

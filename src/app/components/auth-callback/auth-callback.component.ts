@@ -20,7 +20,7 @@ export class AuthCallbackComponent implements OnInit {
       const state = params['state'];
       if (code) {
         try {
-            this.cognitoService.handleAuthCode(code);
+            this.cognitoService.handleAuthCode(code, state);
         } catch (error) {
             console.error('Error handling auth code:', error);
         }

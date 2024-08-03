@@ -3,7 +3,7 @@ import { PortfolioDetails } from '../models/portfolio-details';
 import { CognitoService, IUser } from './cognito.service';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { Position } from '../models/position';
 import { AVTimeSeries } from '../models/alpha-vantage-time-series';
 
@@ -20,18 +20,18 @@ export class PortfolioService {
         this.user = cognitoService.getUserDetails();
     }
 
-    public getPortfoliosForUser() : Observable<PortfolioDetails[]> {
-        const headers = this.tokenCheck();
-        return this.http.get<PortfolioDetails[]>(`${this.portfolioEndpoint}/username?username=${this.user['cognito:username']}`, {headers});
+    public async getPortfoliosForUser() : Promise<PortfolioDetails[]> {
+        const headers = await this.tokenCheck();
+        return firstValueFrom(this.http.get<PortfolioDetails[]>(`${this.portfolioEndpoint}/username?username=${this.user['cognito:username']}`, {headers}));
     }
 
-    public getPositionsForPortfolio(portfolioId: string) : Observable<Position[]> {
-        const headers = this.tokenCheck();
-        return this.http.get<Position[]>(`${this.portfolioEndpoint}/positions?portfolioId=${portfolioId}`, { headers });
+    public async getPositionsForPortfolio(portfolioId: string) : Promise<Position[]> {
+        const headers = await this.tokenCheck();
+        return firstValueFrom(this.http.get<Position[]>(`${this.portfolioEndpoint}/positions?portfolioId=${portfolioId}`, { headers }));
     }
 
-    private tokenCheck(): HttpHeaders {
-        let token: string = this.cognitoService.getToken();
+    private async tokenCheck(): Promise<HttpHeaders> {
+        let token: string = await this.cognitoService.getToken();
         if (!token) {
             this.cognitoService.redirectToCognitoLogin(`${environment.frontendUrl}/dashboard`);
         }
@@ -40,9 +40,9 @@ export class PortfolioService {
         });
     }
 
-    public getHistoricalData(ticker: string): Observable<AVTimeSeries> {
-        const headers = this.tokenCheck();
-        return this.http.get<AVTimeSeries>(`${environment.backendUrl}/history?ticker=${ticker}`, { headers });
+    public async getHistoricalData(ticker: string): Promise<AVTimeSeries> {
+        const headers = await this.tokenCheck();
+        return firstValueFrom(this.http.get<AVTimeSeries>(`${environment.backendUrl}/history?ticker=${ticker}`, { headers }));
     }
 
 }

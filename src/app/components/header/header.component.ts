@@ -24,6 +24,14 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['yahoo']);
   }
 
+  routeToDashboard() {
+    this.router.navigate(['dashboard']);
+  }
+
+  routeToTradingPage() {
+    this.router.navigate(['trading']);
+  }
+
   routeToAboutPage() {
     this.router.navigate(['about']);
   }

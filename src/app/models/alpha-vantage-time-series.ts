@@ -7,7 +7,7 @@ export class AVTimeSeries {
 class metaData {
     "1. Information": string;
     "2. Symbol": string;
-    "3. LastRefreshed": Date;
+    "3. LastRefreshed": string;
     "4. Output Size": string;
     "5. Time Zone": string;
 }

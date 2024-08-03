@@ -19,7 +19,7 @@ export class YahooProjectPageComponent implements OnInit {
 
   getDetails() {
     var detail: StockDetails;
-    this.yahooService.getTickerSummary(this.ticker).subscribe( (data) => {
+    this.yahooService.getTickerSummary(this.ticker).then( (data) => {
       detail = data;
       detail.ticker = this.ticker
       this.onPage = [detail, ...this.onPage];

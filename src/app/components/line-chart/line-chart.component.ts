@@ -4,7 +4,8 @@ import { ChartConfiguration, ChartOptions, ChartType, Chart, registerables } fro
 import { PortfolioService } from 'src/app/services/portfolio.service';
 import { Position } from 'src/app/models/position';
 import { AVTimeSeries } from 'src/app/models/alpha-vantage-time-series';
-import { Observable } from 'rxjs';
+import 'chartjs-adapter-date-fns';
+import { enUS } from 'date-fns/locale';
 
 @Component({
   selector: 'app-line-chart',
@@ -16,6 +17,9 @@ export class LineChartComponent implements OnInit {
   @Input()
   positions!: Position[]|undefined;
 
+  public lineChartLegend = true;
+  public lineChartType: ChartType = 'line';
+
 
   public lineChartData: ChartConfiguration['data'] = {
     datasets: [
@@ -24,10 +28,25 @@ export class LineChartComponent implements OnInit {
     labels: [],
   };
 
-  public lineChartOptions: ChartOptions & { annotation: any } = {
+  public lineChartOptions: ChartOptions = {
     responsive: true,
     scales: {
       // We use this empty structure as a placeholder for dynamic theming.
+      x: {
+        type: 'time',
+        time: {
+          unit: 'month'
+        },
+        title: {
+          display: true,
+          text: 'Date'
+        },
+        adapters: {
+          date: {
+            locale: enUS,
+          },
+        }
+      },
       y: {
         position: 'left',
       },
@@ -41,15 +60,18 @@ export class LineChartComponent implements OnInit {
         },
       },
     },
-    annotation: {},
+    plugins: {
+      tooltip: {
+        mode: 'index',
+        intersect: false
+      }
+    },
     hover: {
-      mode: 'nearest',
-      intersect: true
+      mode: 'index',
+      intersect: false,
     }
   };
 
-  public lineChartLegend = true;
-  public lineChartType: ChartType = 'line';
 
   constructor(private portfolioService: PortfolioService) {
     Chart.register(...registerables);
@@ -59,22 +81,29 @@ export class LineChartComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this. positions) {
-      console.log(this.positions[0]);
       for (const p of this.positions) {
-        let histObs: Observable<AVTimeSeries> = this.portfolioService.getHistoricalData(p.ticker);
-        histObs.subscribe(
+        let histObs: Promise<AVTimeSeries> = this.portfolioService.getHistoricalData(p.ticker);
+        histObs.then(
           h => {
             let stockValues: number[] = [];
             let labels: string[] = [];
+            let dv2: any[] = [];
             let hMap= new Map(Object.entries(h["Time Series (Daily)"]));
             hMap.forEach(
               (value, key) => {
                 labels.push(key);
                 stockValues.push(Number.parseFloat(JSON.stringify(value["1. open"])));
+                let t = {
+                    x: new Date(key).getTime(),
+                    y: Number.parseFloat(JSON.stringify(value["1. open"]))
+                };
+                dv2.push(t);
               }
             );
+
             const apiData = {
-              data: stockValues,
+              type: this.lineChartType,
+              data: dv2,
               label: p.ticker,
               backgroundColor: 'rgba(148,159,177,0.2)',
               borderColor: 'rgba(148,159,177,1)',
@@ -83,10 +112,12 @@ export class LineChartComponent implements OnInit {
               pointHoverBackgroundColor: '#fff',
               pointHoverBorderColor: 'rgba(148,159,177,0.8)',
               fill: 'origin',
+              pointRadius: 0, // Hide points by default
+              pointHoverRadius: 8 // Show points on hover
             };
 
             this.lineChartData.datasets.push(apiData);
-            this.lineChartData.labels = labels;
+            this.applyRandomColors();
             this.chart?.update();
           }
         );
@@ -100,5 +131,22 @@ export class LineChartComponent implements OnInit {
 
   chartClicked(event: any): void {
     console.log(event);
+  }
+
+  // Function to generate a random RGB color
+  generateRandomColor(): string {
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    return `rgba(${r},${g},${b}`;
+  }
+
+  // Apply random colors to each dataset
+  applyRandomColors(): void {
+    this.lineChartData.datasets.forEach((dataset) => {
+      const randomColor = this.generateRandomColor();
+      dataset.borderColor = randomColor + '1';
+      dataset.backgroundColor = randomColor + ', 0.15';
+    });
   }
 }

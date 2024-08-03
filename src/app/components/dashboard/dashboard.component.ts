@@ -23,12 +23,12 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     // Initialize component data here
     this.userDetails = this.cognitoService.getUserDetails();
-    this.portfolioService.getPortfoliosForUser().subscribe(
+    this.portfolioService.getPortfoliosForUser().then(
       p => {
         this.portfolios = p;
         this.positions = new Map<string, Position[]>;
         this.portfolios.forEach( p => {
-          this.portfolioService.getPositionsForPortfolio(p.id).subscribe(
+          this.portfolioService.getPositionsForPortfolio(p.id).then(
             pos => {
               this.positions.set(p.id, pos);
               this.positions = new Map(this.positions)
