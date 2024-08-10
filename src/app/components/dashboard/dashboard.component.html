@@ -22,7 +22,7 @@
                     <div class="portfolio-tab-content">
                         <mat-card class="portfolio-card">
                             <mat-card-content>
-                                <app-line-chart [positions]="positions.get(detail.id)"></app-line-chart>
+                                <app-line-chart [apiData]="datasets.get(detail.id)"></app-line-chart>
                             </mat-card-content>
                         </mat-card>
                         <mat-card *ngFor="let p of positions.get(detail.id)"

@@ -15,7 +15,7 @@ export class LineChartComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   @Input()
-  positions!: Position[]|undefined;
+  apiData!: any[]|undefined;
 
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
@@ -80,48 +80,12 @@ export class LineChartComponent implements OnInit {
   ngOnInit(): void { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this. positions) {
-      for (const p of this.positions) {
-        let histObs: Promise<AVTimeSeries> = this.portfolioService.getHistoricalData(p.ticker);
-        histObs.then(
-          h => {
-            let stockValues: number[] = [];
-            let labels: string[] = [];
-            let dv2: any[] = [];
-            let hMap= new Map(Object.entries(h["Time Series (Daily)"]));
-            hMap.forEach(
-              (value, key) => {
-                labels.push(key);
-                stockValues.push(Number.parseFloat(JSON.stringify(value["1. open"])));
-                let t = {
-                    x: new Date(key).getTime(),
-                    y: Number.parseFloat(JSON.stringify(value["1. open"]))
-                };
-                dv2.push(t);
-              }
-            );
-
-            const apiData = {
-              type: this.lineChartType,
-              data: dv2,
-              label: p.ticker,
-              backgroundColor: 'rgba(148,159,177,0.2)',
-              borderColor: 'rgba(148,159,177,1)',
-              pointBackgroundColor: 'rgba(148,159,177,1)',
-              pointBorderColor: '#fff',
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: 'rgba(148,159,177,0.8)',
-              fill: 'origin',
-              pointRadius: 0, // Hide points by default
-              pointHoverRadius: 8 // Show points on hover
-            };
-
-            this.lineChartData.datasets.push(apiData);
-            this.applyRandomColors();
-            this.chart?.update();
-          }
-        );
-      };
+    if (this.apiData) {
+      for (const d of this.apiData) {
+        this.lineChartData.datasets.push(d);
+        this.applyRandomColors();
+      }
+      this.chart?.update();
     }
   }
 
