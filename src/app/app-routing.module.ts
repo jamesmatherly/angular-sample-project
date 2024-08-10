@@ -6,6 +6,7 @@ import { WoodworkingPageComponent } from './components/woodworking-page/woodwork
 import { YahooProjectPageComponent } from './components/yahoo-project-page/yahoo-project-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TradingComponent } from './components/trading/trading.component';
 
 const routes: Routes = [
   { path: 'yahoo', component: YahooProjectPageComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'woodworking', component: WoodworkingPageComponent },
   { path: 'callback', component: AuthCallbackComponent },
-  { path: 'dashboard', component: DashboardComponent}
+  { path: 'dashboard', component: DashboardComponent},
+  { path: 'trading', component: TradingComponent}
 ];
 
 @NgModule({

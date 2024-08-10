@@ -9,6 +9,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
@@ -19,6 +20,7 @@ import { WoodworkingPageComponent } from './components/woodworking-page/woodwork
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { BaseChartDirective } from 'ng2-charts';
+import { TradingComponent } from './components/trading/trading.component';
 
 registerLocaleData(en);
 
@@ -31,11 +33,13 @@ registerLocaleData(en);
         AboutPageComponent,
         WoodworkingPageComponent,
         DashboardComponent,
-        LineChartComponent
+        LineChartComponent,
+        TradingComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         FormsModule,
+        MatSelectModule,
         BrowserAnimationsModule,
         AngularMaterialsModule,
         LayoutModule,
