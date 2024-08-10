@@ -9,4 +9,5 @@ RUN npm run build
 FROM nginx:alpine
 COPY nginx.conf /etc/nginx/nginx.conf
 EXPOSE 4200
-COPY --from=build /usr/src/app/dist/angular-sample-project /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist/angular-sample-project/browser /usr/share/nginx/html
+CMD ["nginx", "-g", "daemon off;"]
