@@ -39,6 +39,12 @@ env:
                                                # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: frontend           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
+  COGNITO_CLIENT_ID: ${{ secrets.COGNITO_CLIENT_ID }}
+  COGNITO_CLIENT_SECRET: ${{ secrets.COGNITO_CLIENT_SECRET }}
+  BACKEND_URL: ${{ vars.BACKEND_URL }}
+  FRONTEND_URL: ${{ vars.FRONTEND_URL }}
+  COGNITO_URL: ${{ vars.COGNITO_URL }}
+  COGNITO_DOMAIN: ${{ vars.COGNITO_DOMAIN }}
 
 permissions:
   contents: read
@@ -73,6 +79,12 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
+        sed -i "s|COGNITO_CLIENT_ID|$COGNITO_CLIENT_ID|g" src/environments/environment.prod.ts
+        sed -i "s|COGNITO_CLIENT_SECRET|$COGNITO_CLIENT_SECRET|g" src/environments/environment.prod.ts
+        sed -i "s|BACKEND_URL|$BACKEND_URL|g" src/environments/environment.prod.ts
+        sed -i "s|FRONTEND_URL|$FRONTEND_URL|g" src/environments/environment.prod.ts
+        sed -i "s|COGNITO_URL|$COGNITO_URL|g" src/environments/environment.prod.ts
+        sed -i "s|COGNITO_DOMAIN|$COGNITO_DOMAIN|g" src/environments/environment.prod.ts
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
